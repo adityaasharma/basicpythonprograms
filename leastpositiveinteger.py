@@ -1,6 +1,23 @@
 # -*- coding: utf-8 -*-
 """
 Created on Wed Feb 20 17:13:16 2019
+"""
+Problem: For a giving input of list of numbers, you have to find the lowest positive integer that is not present in the list
+    e.g.
+    Input = [1,2,3]
+    Output = 4
+    
+    Input = [1,22,3,45]
+    Output = 2
+    
+    Input = [-11,1,3]
+    Output = 2
+    
+    Input = [-1,-3]
+    Output = 1
+    
+"""
+
 
 @author: adity
 """
