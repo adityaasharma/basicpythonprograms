@@ -1,0 +1,12 @@
+## Link to Problem Statement
+# https://hackerrank-challenge-pdfs.s3.amazonaws.com/11975-py-collections-ordereddict-English?AWSAccessKeyId=AKIAJ4WZFDFQTZRGO3QA&Expires=1550817243&Signature=nfhFWVfPdd4x7VEJEnq4lb%2F5oQU%3D&response-content-disposition=inline%3B%20filename%3Dpy-collections-ordereddict-English.pdf&response-content-type=application%2Fpdf
+
+from collections import OrderedDict
+OD=OrderedDict()
+for i in range(int(input())):
+  s=input().split()
+  key=' '.join(s[0:len(s)-1])
+  value=int(s[len(s)-1])
+  OD[key]=OD.get(key,0) + value
+for key in OD:
+  print (key, OD[key])
