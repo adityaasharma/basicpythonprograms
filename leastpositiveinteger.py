@@ -30,9 +30,12 @@ A=list(map(int, A)) #mapping each value as an int intot he same list. List is re
 
 def leastmissingpositiveinteger(A):
     A=sorted(A)
-    for i in range(1,A[len(A)-1]+2):
-        if i not in A:
-            return (i)
-            break
+    if max(A)<0:
+        return 1
+    else:
+        for i in range(1,A[len(A)-1]+2):
+            if i not in A:
+                return (i)
+                break
 
 print (leastmissingpositiveinteger(A))
