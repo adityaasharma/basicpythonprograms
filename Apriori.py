@@ -1,32 +1,25 @@
-import numpy as np
-import matplotlib.pyplot as plt
 import pandas as pd
-"""dataset=pd.read_csv('A:\OutputCleaned.csv', header=None, engine='c')
-print (dataset)
-"""
-import csv
-with open('A:\OutputCleaned.csv', 'r') as f:
-    reader = csv.reader(f)
-    transactions = list (reader)
-    #training apriori on dataset
-    from apyori import apriori
-    #rules=apriori(transactions, min_support=0.5, min_confidence=0.2, min_lift=3, min_length=2)
-    rules=apriori(transactions)
-    #Visualising the results
-    results=list(rules)
-    print (results)
-"""
+from apyori import apriori
+#importing the dataset
+dataset=pd.read_excel('Invoice_Dataset_v2.xlsx')
+doi=dataset[['BillingAddressErpId','ErpProductDesc']]
+uniqerpids=doi.BillingAddressErpId.unique()
+noofrows=len(doi.index)
 transactions=[]
-for i in range(0, 88461):
-    transactions.append([str(dataset.values[i,0])])
+for i in uniqerpids:
+    mylist=[]
+    for j in range(noofrows):
+        if i==int(doi.iloc[j,0]):
+            mylist.append(doi.iloc[j,1])
+    if len(mylist)>0:
+        transactions.append(mylist)
 
-"""
-
-"""
-import csv
-with open("A:\OutputCleaned.csv", header = None) as f:
-    ncols = len(f.readline().split(','))
-    nrows = sum(1 for row in f)
-print (ncols)
-print (nrows)
-"""
+#Traing data on Apriori Model
+rules=apriori(transactions, min_support=0.02, min_confidence=0.3)
+#Visualising the results
+results=list(rules)
+for item in results:
+    pair = item[0]
+    items = [x for x in pair]
+    if len(items)>1:
+        print("Rule: " + items[0] + "," + items[1],",Supp: " + str(item[1]),",Conf: " + str(item[2][0][2]),",Lf: " + str(item[2][0][3]))
